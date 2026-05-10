@@ -22,6 +22,9 @@ router.route("/")
 // NEW route 
 router.get("/new",isLoggedIn ,listingController.renderNewform);
 
+//search route
+router.get("/search", wrapasync(listingController.searchListings));
+
 
 router.route("/:id")
 .get(
@@ -31,11 +34,12 @@ router.route("/:id")
     validatelisting,
     isLoggedIn,
     isOwner,
-      wrapasync(listingController.updatelisting ))
+    upload.single("image"),
+    wrapasync(listingController.updatelisting)
+)
   .delete(
   isLoggedIn ,
   isOwner,
-  upload.single('image'),
   wrapasync(listingController.destroylisting));
 
   //edit route

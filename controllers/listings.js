@@ -52,19 +52,29 @@ module.exports.createlisting = async (req, res,next) => {
     
         }
 
-    module.exports.updatelisting = async (req, res) => { 
-    const { id } = req.params;
-     let listing = await Listing.findByIdAndUpdate(id, req.body.listing);
+   module.exports.updatelisting = async (req, res) => {
 
-     if(typeof req.file !== "undefined"){
-     let url = req.file.path;
-     let filename = req.file.filename;
-     listing.image = {url, filename};
-     await listing.save();
-     }
-      req.flash("success"," Listing Updated!");
-     res.redirect(`/listings/${id}`);
-     }
+   const { id } = req.params;
+
+   let listing = await Listing.findByIdAndUpdate(
+      id,
+      req.body.listing,
+      { new: true }
+   );
+
+   if(req.file){
+      let url = req.file.path;
+      let filename = req.file.filename;
+
+      listing.image = { url, filename };
+
+      await listing.save();
+   }
+
+   req.flash("success", "Listing Updated!");
+
+   res.redirect(`/listings/${id}`);
+};
 
     module.exports.destroylisting = async(req,res)=>{
     let { id } = req.params;
@@ -72,5 +82,21 @@ module.exports.createlisting = async (req, res,next) => {
      req.flash("success"," Listing Deleted");
      res.redirect("/listings");
         
-}
+};
 
+module.exports.searchListings = async (req, res) => {
+
+   let { q } = req.query;
+
+   const foundListing = await Listing.find({
+      $or: [
+         { title: { $regex: q, $options: "i" } },
+         { location: { $regex: q, $options: "i" } },
+         { country: { $regex: q, $options: "i" } }
+      ]
+   });
+
+   res.render("listings/index", {
+      alllisting: foundListing
+   });
+};

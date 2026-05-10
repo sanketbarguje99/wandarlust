@@ -86,6 +86,10 @@ passport.use(new LocalStrategy(User.authenticate()));
  passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
+app.get("/",(req,res) =>{
+    res.redirect("/listings");
+})
+
 
 app.use("/listings",listingRouter);
 app.use("/listings/:id/reviews",reviewRouter);
