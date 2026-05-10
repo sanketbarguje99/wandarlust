@@ -112,42 +112,109 @@ padding-right:0;
     padding-left: 0;
     padding-right: 0;
 }
+/* =========================
+   LISTING CARDS
+========================= */
 
-/* Navbar stays same */
-@media (min-width: 768px) {
-  .navbar {
-    flex-direction: row;
-    justify-content: space-between;
-  }
+.listing-card{
+  border: none !important;
+  margin-bottom: 2rem;
 }
 
-
-/* Navbar stays same */
-@media (min-width: 768px) {
-  .navbar {
-    flex-direction: row;
-    justify-content: space-between;
-  }
+.card-img-top{
+  width: 100%;
+  border-radius: 1rem;
+  object-fit: cover;
 }
 
+/* =========================
+   FILTERS
+========================= */
 
-
-@media (max-width: 600px) {
-  .filter {
-    flex: 1 1 45%;
-    max-width: 45%;
-  }
+#filters{
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  scrollbar-width: none;
+  align-items: center;
 }
 
-
-@media (min-width: 900px) {
-  .filter {
-    flex: 1 1 120px;
-    max-width: 120px;
-  }
+#filters::-webkit-scrollbar{
+  display: none;
 }
 
-.filter i {
-  font-size: 1.2rem;   /* keep consistent */
-  display: block;
+.filter{
+  flex: 0 0 auto;
+}
+
+/* =========================
+   SEARCH BAR
+========================= */
+
+.search{
+  width: 40%;
+}
+
+.search-inp{
+  width: 100%;
+}
+
+/* =========================
+   MOBILE RESPONSIVE
+========================= */
+
+@media(max-width:768px){
+
+  /* Navbar */
+  .navbar-collapse{
+    background-color: white;
+    padding: 1rem;
+  }
+
+  /* Search bar */
+  .search{
+    width: 100%;
+    margin-top: 1rem;
+  }
+
+  .search form{
+    width: 100%;
+  }
+
+  .search-inp{
+    width: 100%;
+    padding: 0.5rem 1rem;
+  }
+
+  .btn-search{
+    padding: 0.5rem 1rem;
+  }
+
+  /* Filters */
+  #filters{
+    padding-bottom: 1rem;
+  }
+
+  .filter{
+    margin-right: 1.5rem;
+  }
+
+  /* Tax Toggle */
+  .tax-toggle{
+    margin-left: 1rem;
+    min-width: 250px;
+  }
+
+  /* Cards */
+  .listing-card{
+    margin-bottom: 1rem;
+  }
+
+  .card-text{
+    font-size: 0.95rem;
+  }
+
+  .card-img-top{
+    height: 16rem !important;
+  }
 }
